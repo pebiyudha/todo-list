@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">To-Do List</h1>
+
+    <!-- Form untuk menambahkan tugas -->
+    <form action="/add" method="POST" class="form-inline justify-content-center mb-4">
+      <input type="text" name="task" class="form-control mr-2" placeholder="Enter a task" required>
+      <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+
+    <!-- Daftar tugas -->
+    <ul class="list-group">
+      <% todos.forEach(todo => { %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span style="<%= todo.completed ? 'text-decoration: line-through;' : '' %>"><%= todo.task %></span>
+          <div>
+            <% if (!todo.completed) { %>
+              <form action="/complete/<%= todo.id %>" method="POST" style="display: inline;">
+                <button type="submit" class="btn btn-success btn-sm">Complete</button>
+              </form>
+            <% } %>
+            <form action="/delete/<%= todo.id %>" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
