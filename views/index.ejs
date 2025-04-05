@@ -5,15 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do List</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+  <script src='https://unpkg.com/css-doodle@0.29.1/css-doodle.min.js'></script>
+  
 </head>
 <body>
   <div class="container mt-5">
     <h1 class="text-center">To-Do List</h1>
+	
+	<div align="center">
+	<css-doodle>
+	<style>
+		@grid: 20 / 60vmin;
+
+		background: black;
+		scale: 0;
+		opacity: 0;
+		animation: m 4s linear infinite;
+		
+		animation-delay: calc(
+		  -1s/@I * @i * @sin(@i)
+		);
+
+		@keyframes m {
+		  0%, 50%, 90% { scale: 1; opacity: 1 }
+		  25%, 75%, 100% { scale: 0; opacity: 0 }
+		}
+	</style>
+	</css-doodle>
+	</div><br />
 
     <!-- Form untuk menambahkan tugas -->
     <form action="/add" method="POST" class="form-inline justify-content-center mb-4">
       <input type="text" name="task" class="form-control mr-2" placeholder="Enter a task" required>
-      <button type="submit" class="btn btn-primary">Add Task</button>
+      <button type="submit" class="btn btn-primary"><i class="fa-solid fa-list-check"></i> Add Task</button>
     </form>
 
     <!-- Daftar tugas -->
@@ -24,11 +49,11 @@
           <div>
             <% if (!todo.completed) { %>
               <form action="/complete/<%= todo.id %>" method="POST" style="display: inline;">
-                <button type="submit" class="btn btn-success btn-sm">Complete</button>
+                <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i> Complete</button>
               </form>
             <% } %>
             <form action="/delete/<%= todo.id %>" method="POST" style="display: inline;">
-              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
             </form>
           </div>
         </li>
